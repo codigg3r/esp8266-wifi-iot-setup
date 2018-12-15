@@ -52,31 +52,31 @@ void hardReset(){
    if(configRes){
     WiFi.softAPdisconnect(true);
    }else{
-    Serial.println("Konfigürasyon verisi alınamdı, tekrar deneniyor!") ;
+    Serial.println("KonfigÃ¼rasyon verisi alÃ½namdÃ½, tekrar deneniyor!") ;
     configRes = configAl();
     tOut --;
    }}
    WiFi.mode(WIFI_STA);
    Serial.println("hata burada");
    WiFi.begin( ssid.c_str(),pass.c_str());
-   Serial.println("---Baglanti moduna geçildi---");
+   Serial.println("---Baglanti moduna geÃ§ildi---");
    while ((WiFi.status() != WL_CONNECTED)){
     delay(100);
     Serial.print(".");
    }
-    Serial.println("Wifi Baağlandı") ;
+    Serial.println("Wifi BaaÃ°landÃ½") ;
     Serial.println("---Hard Reset Sona Erdi.---");
   
 }
 
 //====================================
-//======== VERİ ======================
+//======== VERÃ ======================
 //====================================
 
-  // type = true(veri gönder), false(veri al)
+  // type = true(veri gÃ¶nder), false(veri al)
   // uid = F48cHLaoG1dSVUzrsls0onx2ItT2
   // tablo = vana , tekrar
-  // sutun = gün adı(pzt , sal ,car, per, cum, cmt, paz)
+  // sutun = gÃ¼n adÃ½(pzt , sal ,car, per, cum, cmt, paz)
   // key = onTime, offTime , vanaDurum
   // data = {onTime,offTime}(10:30) , vanaDurum(on off)
 bool veri(bool type , String uid, String tablo, String sutun, String key,String data ){
@@ -121,35 +121,35 @@ bool veri(bool type , String uid, String tablo, String sutun, String key,String 
           return true;
         }
       } else {
-        Serial.printf("Data alınırken veya yazılırken hata oldu, hata kodu: %s\n", http.errorToString(httpCode).c_str());
+        Serial.printf("Data alÃ½nÃ½rken veya yazÃ½lÃ½rken hata oldu, hata kodu: %s\n", http.errorToString(httpCode).c_str());
         return false;
       }
       http.end();
   
   }else{
     timeOut --;
-    Serial.println("Wifi Baglantı hatası, Yeniden Baglanılıyor .. ");
+    Serial.println("Wifi BaglantÃ½ hatasÃ½, Yeniden BaglanÃ½lÃ½yor .. ");
     delay(1000);
     }
   }
 
   
 //====================================
-//======== WİFİ YAYIN ================
+//======== WÃFÃ YAYIN ================
 //====================================
   
-  // wifi yayını başlatır 
+  // wifi yayÃ½nÃ½ baÃ¾latÃ½r 
   
   void wifiYay(){
-  Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "---Config Hazır---" : "Config Hata!");
-  Serial.println(WiFi.softAP("vana","vanakey00") ? "---Wifi Yayının Başladı---" : "Wifi Yayını Başlayamadı!");
+  Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "---Config HazÃ½r---" : "Config Hata!");
+  Serial.println(WiFi.softAP("vana","vanakey00") ? "---Wifi YayÃ½nÃ½n BaÃ¾ladÃ½---" : "Wifi YayÃ½nÃ½ BaÃ¾layamadÃ½!");
   Serial.print("Soft-AP IP address = ");
   Serial.println(WiFi.softAPIP());
   server.begin();
   }
 
 //====================================
-//========= CONFİG ===================
+//========= CONFÃG ===================
 //====================================
  
   // ssid, pass, ve uid alma
@@ -161,11 +161,11 @@ bool veri(bool type , String uid, String tablo, String sutun, String key,String 
     client = server.available();
   }
   Serial.println("istemci geldi.");
-  // İstemci veri gönderenne kadar bekle
+  // Ãstemci veri gÃ¶nderenne kadar bekle
   while(!client.available()){
     delay(1);
   }
-  Serial.println("istemci veri gönderdi.");
+  Serial.println("istemci veri gÃ¶nderdi.");
   
   String req = client.readStringUntil('\r');
   client.flush();
